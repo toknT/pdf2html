@@ -20,11 +20,13 @@ const download = (filename) => {
                         console.log(`Finished downloading dependency ${filename}.`);
                     });
                 } else {
-                    throw new Error(`Failed downloading dependency ${filename}.`);
+                    console.log(`Failed downloading dependency ${filename}.`);
+                    // throw new Error(`Failed downloading dependency ${filename}.`);
                 }
             });
             request.on('error', () => {
-                throw new Error(`Failed downloading dependency ${filename}.`);
+                console.log(`Failed downloading dependency ${filename}.`);
+                // throw new Error(`Failed downloading dependency ${filename}.`);
             });
         }
     });
