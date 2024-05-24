@@ -9,6 +9,8 @@ const dependencies = {
 
 const download = (filename) => {
     const filePath = constants.DIRECTORY.VENDOR + filename;
+    console.log(`In some network it will error. Skip downloading dependency ${filename}.`);
+    return;
     fs.access(filePath, fs.constants.F_OK, (err) => {
         if (err) {
             console.log(`Started downloading dependency ${filename}.`);
@@ -20,13 +22,11 @@ const download = (filename) => {
                         console.log(`Finished downloading dependency ${filename}.`);
                     });
                 } else {
-                    console.log(`Failed downloading dependency ${filename}.`);
-                    // throw new Error(`Failed downloading dependency ${filename}.`);
+                    throw new Error(`Failed downloading dependency ${filename}.`);
                 }
             });
             request.on('error', () => {
-                console.log(`Failed downloading dependency ${filename}.`);
-                // throw new Error(`Failed downloading dependency ${filename}.`);
+                throw new Error(`Failed downloading dependency ${filename}.`);
             });
         }
     });
